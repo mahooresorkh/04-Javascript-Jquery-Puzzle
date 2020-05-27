@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html{
+            background-color: darkslategray;
+            width: 600px;
+            height: 600px;
+            margin: 0px auto;
+            box-sizing: border-box;
+        }
+        #main{
+            width:600px;
+            height:600px;
+            margin: 0 auto;
+            padding: 0px;
+            position: relative;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 20px black;
+        }
+        #main > div{
+            border: 1px solid black;
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-repeat: no-repeat;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+        h1{
+            margin: 15px auto;
+            text-align: center;
+            color: beige;
+        }
+        h2{
+            margin: 15px auto;
+            text-align: center;
+            color: chartreuse;
+        }
+    </style>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+            var url = window.location.href;
+            var piecesDivisions = null;
+            var indexOfEqualSign =  url.lastIndexOf('=');
+            var puzzleName = url.substr(indexOfEqualSign+1,url.length-1);
+            Positions = [
+                            {top:"0px"    ,left:"0px"},
+                            {top:"0px"    ,left:"150px"},
+                            {top:"0px"    ,left:"300px"},
+                            {top:"0px"    ,left:"450px"},
+                            {top:"150px"  ,left:"0px"},
+                            {top:"150px"  ,left:"150px"},
+                            {top:"150px"  ,left:"300px"},
+                            {top:"150px"  ,left:"450px"},
+                            {top:"300px"  ,left:"0px"},
+                            {top:"300px"  ,left:"150px"},
+                            {top:"300px"  ,left:"300px"},
+                            {top:"300px"  ,left:"450px"},
+                            {top:"450px"  ,left:"0px"},
+                            {top:"450px"  ,left:"150px"},
+                            {top:"450px"  ,left:"300px"},
+                            {top:"450px"  ,left:"450px"}
+                        ];
+
+            
+
+            function shuffle(a) {
+                var j, x, i;
+                for (i = a.length - 1; i > 0; i--) {
+                    j = Math.floor(Math.random() * (i + 1));
+                    x = a[i];
+                    a[i] = a[j];
+                    a[j] = x;
+                }
+                return a;
+            }
+
+
+            $(document).ready(function(){
+                $('#main > div').css({backgroundImage: 'url("' + puzzleName +  '.jpg")'});
+                var Position = new Array();
+                var piecesNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+                piecesNumbers = shuffle(piecesNumbers);
+                piecesDivisions = $('#main > div').toArray(); 
+                $.each(piecesDivisions,function(i,val){
+                    val.style.top = Positions[piecesNumbers[i]].top;
+                    val.style.left = Positions[piecesNumbers[i]].left;
+                });
+
+            });
+
+
+           
+
+
+            var completed = false;
+            var selectedElement = null;
+            selectedElementNumber = 0;
+            var movements = 0;
+            function selectFunc(elem){
+                if(!completed){
+                    if(selectedElement==null){
+                        $(elem).css({border:'1px solid white', zIndex:'1000'});
+                        selectedElement = elem;
+                        selectedElementNumber++;
+                    }
+                    else if((selectedElement != elem) && (selectedElementNumber==1)){
+                        selectedElementNumber++;
+                        var elemPosition = [elem.style.left,elem.style.top];
+                        $(elem).css({border:'1px solid white',zIndex:'1000'});         
+                        //animations
+                        $(elem).animate({
+                            left: selectedElement.style.left,
+                            top: selectedElement.style.top
+                        }
+                        ,1500);
+                        $(selectedElement).animate({
+                            left: elemPosition[0],
+                            top: elemPosition[1]
+                        }
+                        ,1500);
+                                        
+                        //***********************************    
+                        var resetVar = setInterval(function(){
+                            $(elem).css({zIndex: '0', border: '1px solid black'});
+                            $(selectedElement).css({zIndex: '0', border: '1px solid black'});
+                               
+                            $.each(piecesDivisions,function(i,val){
+                                if(val.style.top != Positions[i].top || val.style.left != Positions[i].left){
+                                    return false;
+                                }
+                                
+                                else if(i == 15){
+                                    alert('Congratulations!');
+                                    completed = true;
+                                }
+                            });
+
+                            selectedElement = null;
+                            selectedElementNumber = 0;
+                            movements++;
+                            $('h2 > span').text(movements);
+                            clearInterval(resetVar);
+                        },1600);
+                    }
+                }
+                else{
+                    alert("It's done!");
+                }    
+            }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle</title>
+</head>
+<body>
+    <h1>A simple javascript and jquery Puzzle</h1>
+    <div id="main">
+        <div style="background-position: 0px 0px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -150px 0px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -300px 0px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -450px 0px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: 0px -150px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -150px -150px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -300px -150px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -450px -150px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: 0px -300px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -150px -300px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -300px -300px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -450px -300px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: 0px -450px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -150px -450px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -300px -450px;" onclick="selectFunc(this)"></div>
+        <div style="background-position: -450px -450px;" onclick="selectFunc(this)"></div>
+    </div>
+    <h2><span>0</span> movement(s)</h2>
+</body>
+</html>

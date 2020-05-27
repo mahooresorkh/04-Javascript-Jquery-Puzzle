@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <title>شروع بازی</title>
+    <style>
+        @media (max-width: 600px) {
+            form{
+                width: 320px !important;
+            }
+            div#main-container{
+                font-size: 1.7vw !important;
+            }
+            div#but-container > button{
+                font-size: 10px;
+                
+            }
+        }
+        form{
+            width:530px;
+            margin: 50px auto;
+            border: 1px solid red;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px purple;
+        }
+        div#main-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width:100%;
+            margin: 10px auto;
+            font-size: large;
+            font-weight: bold;
+            
+        }
+        div#main-container > div.form-check{
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+        
+        form > div#but-container{
+            margin: 10px auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="puzzle/index.html">
+        <div id="main-container">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios1" value="sloth" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Sloth
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios2" value="coffee">
+                <label class="form-check-label" for="exampleRadios2">
+                    Coffee
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios3" value="pizza">
+                <label class="form-check-label" for="exampleRadios3">
+                    Pizza
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios4" value="joker">
+                <label class="form-check-label" for="exampleRadios4">
+                    Joker
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios5" value="chocolate">
+                <label class="form-check-label" for="exampleRadios5">
+                    Chocolate Cake
+                </label>
+            </div> 
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios6" value="marx">
+                <label class="form-check-label" for="exampleRadios6">
+                    Carl Marx
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios7" value="lion">
+                <label class="form-check-label" for="exampleRadios7">
+                    Lion
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios8" value="bach">
+                <label class="form-check-label" for="exampleRadios8">
+                    Johann Sebastian Bach
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios9" value="graffiti">
+                <label class="form-check-label" for="exampleRadios9">
+                    Grafitti
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="puzzleName" id="exampleRadios10" value="dog">
+                <label class="form-check-label" for="exampleRadios10">
+                    Dog
+                </label>
+            </div>
+        </div>    
+        <div id="but-container">
+            <button type="submit" class="btn btn-primary">Start Game</button>
+        </div>
+        
+    </form>
+</body>
+</html>
